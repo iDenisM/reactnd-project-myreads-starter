@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Book from './Book'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
@@ -22,7 +23,10 @@ class ListBooks extends Component {
       BooksAPI.search(query)
         .then(found => {
           found.map(foundBook => {
-            foundBook.shelf = 'none'
+            /* TODO: Check if the found book is in the users shelf
+            * display first the found book with a note of what shelf it is in
+            */
+            //foundBook.shelf = 'none'
           })
           return this.setState({ foundBooks: found })
         })
@@ -39,8 +43,6 @@ class ListBooks extends Component {
   }
 
   render() {
-
-
     return (
 
       <div className="search-books">
@@ -50,14 +52,6 @@ class ListBooks extends Component {
             className="close-search"
           >Close</Link>
           <div className="search-books-input-wrapper">
-            {/*
-              NOTES: The search from BooksAPI is limited to a particular set of search terms.
-              You can find these search terms here:
-              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-              you don't find a specific author or title. Every search is limited by search terms.
-            */}
             <input
               type="text"
               placeholder="Search by title or author"
@@ -83,35 +77,11 @@ class ListBooks extends Component {
 
             ) : (
               this.state.foundBooks.map((book) => (
-                <li key={book.id}>
-                  <div className="book">
-                    <div className="book-top">
-                      <div
-                        className="book-cover"
-                        style={{
-                          width: 128,
-                          height: 193,
-                          backgroundImage: `url(${book.imageLinks.thumbnail})`
-                        }}>
-                      </div>
-                      <div className="book-shelf-changer">
-                        <select>
-                          <option value="none" disabled>Move to...</option>
-                          <option value="currentlyReading">Currently Reading</option>
-                          <option value="wantToRead">Want to Read</option>
-                          <option value="read">Read</option>
-                          <option value="none">None</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="book-title">{book.title}</div>
-                    {book.authors && (
-                      book.authors.map((author) => (
-                        <div key={author} className="book-authors">{author}</div>
-                      ))
-                    )}
-                  </div>
-                </li>
+                <Book
+                  key={book.id}
+                  book={book}
+                  onChangeShelf={this.props.onChangeShelf}
+                />
               ))
             )}
           </ol>

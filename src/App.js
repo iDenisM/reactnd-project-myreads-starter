@@ -7,12 +7,6 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
     showSearchPage: false,
     books: [],
     shelfs: {
@@ -26,12 +20,25 @@ class BooksApp extends React.Component {
     BooksAPI.getAll()
       .then((books) => {
         this.setState({ books })
-        console.log(books);
+        // console.log(books);
       })
   }
 
-  bookStateChanger = (book) => {
-
+  changeShelf = (book, shelf) => {
+    /* Use the findIndex to see if the book is in the book array
+    * if the value is less then 0 (ususaly -1) then there is no
+    * book in the book array
+    */
+    const bookId = this.state.books.findIndex(b => b.id === book.id)
+    // Check if the book is new or it exists in the book array
+    bookId < 0 ? (
+      // This is a new book
+      this.setState((state) => state.books.concat([book]))
+    ) : (
+      // This is an existing book
+      this.setState((state) => state.books[bookId].shelf = shelf)
+    )
+    BooksAPI.update({id: book.id}, shelf)
   }
 
   render() {
@@ -40,11 +47,13 @@ class BooksApp extends React.Component {
         <Route exact path='/search' render={() => (
           <ListBooks
             books={this.state.books}
+            onChangeShelf={this.changeShelf}
           />
         )}/>
         <Route exact path='/' render={() => (
           <Shelfs
             books={this.state.books}
+            onChangeShelf={this.changeShelf}
           />
         )}/>
 
