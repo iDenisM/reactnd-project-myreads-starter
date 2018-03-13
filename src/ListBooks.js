@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 
-class ListBooks extends React.Component {
+class ListBooks extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired
   }
@@ -19,7 +19,6 @@ class ListBooks extends React.Component {
     this.setState({ query: query })
     if (query) {
       this.setState({ noBooksFound: false })
-      const books = this.props.books
       BooksAPI.search(query)
         .then(found => {
           found.map(foundBook => {

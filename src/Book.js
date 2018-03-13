@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-class Book extends React.Component {
-  // Shelf change method
+class Book extends Component {
+  // Shelf select change option method
   handleChangeShelf = (event) => {
     this.props.onChangeShelf && this.props.onChangeShelf(this.props.book, event.target.value)
   }
@@ -22,7 +22,7 @@ class Book extends React.Component {
             </div>
             <div className="book-shelf-changer">
               {
-                /* Set the selector to None if not in shelf
+                /* Set the selector to None if no shelf assigned
                 * if in shelf then use the correct shelf selector
                 */
               }
