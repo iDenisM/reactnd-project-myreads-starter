@@ -172,3 +172,9 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+.book-cover-own {
+  border-style: solid;
+  border-color: deepskyblue;
+  border-width: initial;
+}

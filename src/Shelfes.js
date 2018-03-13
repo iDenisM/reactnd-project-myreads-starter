@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Shelf from './Shelf'
 import { Link } from 'react-router-dom'
 
-class Shelfs extends Component {
+class Shelfes extends Component {
   render() {
     return (
       <div className="list-books">
@@ -11,7 +11,7 @@ class Shelfs extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            {this.props.shelfs.map((shelf) => (
+            {this.props.shelfes.map((shelf) => (
               <Shelf
                 key={shelf.value}
                 shelf={shelf}
@@ -31,4 +31,4 @@ class Shelfs extends Component {
   }
 }
 
-export default Shelfs
+export default Shelfes

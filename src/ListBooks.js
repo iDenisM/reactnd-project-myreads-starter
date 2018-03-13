@@ -44,7 +44,6 @@ class ListBooks extends Component {
 
   render() {
     return (
-
       <div className="search-books">
         <div className="search-books-bar">
           <Link

@@ -1,13 +1,12 @@
 import React from 'react'
 import ListBooks from './ListBooks'
-import Shelfs from './Shelfs'
+import Shelfes from './Shelfes'
 import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    showSearchPage: false,
     books: []
   }
 
@@ -47,7 +46,7 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    const shelfs = [{
+    const shelfes = [{
       name: 'Currently Reading',
       value: 'currentlyReading'
     }, {
@@ -67,10 +66,10 @@ class BooksApp extends React.Component {
           />
         )}/>
         <Route exact path='/' render={() => (
-          <Shelfs
+          <Shelfes
             books={this.state.books}
             onChangeShelf={this.changeShelf}
-            shelfs={shelfs}
+            shelfes={shelfes}
           />
         )}/>
 
