@@ -8,20 +8,17 @@ import './App.css'
 class BooksApp extends React.Component {
   state = {
     showSearchPage: false,
-    books: [],
-    shelfs: {
-      currentlyReading: [],
-      wantToRead: [],
-      read: []
-    }
+    books: []
   }
 
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
         this.setState({ books })
-        // console.log(books);
       })
+  }
+
+  changeShelf1 = (book, shelf) => {
   }
 
   changeShelf = (book, shelf) => {
@@ -31,14 +28,22 @@ class BooksApp extends React.Component {
     */
     const bookId = this.state.books.findIndex(b => b.id === book.id)
     // Check if the book is new or it exists in the book array
-    bookId < 0 ? (
+    if (bookId < 0) {
+      book.shelf = shelf
       // This is a new book
-      this.setState((state) => state.books.concat([book]))
-    ) : (
+      this.setState((state) => state.books.push(book))
+      console.log(book.shelf)
+      console.log(this.state.books)
+    } else {
       // This is an existing book
       this.setState((state) => state.books[bookId].shelf = shelf)
-    )
+    }
+    /* Check if any book with shelf none has lave in the
+    * state book array if so delete it from the array
+    */
+    this.setState((state) => (state.books.filter((b) => b.shelf !== 'none')))
     BooksAPI.update({id: book.id}, shelf)
+    console.log(this.state.books)
   }
 
   render() {

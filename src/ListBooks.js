@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 
-class ListBooks extends Component {
+class ListBooks extends React.Component {
   static propTypes = {
     books: PropTypes.array.isRequired
   }
@@ -23,10 +23,11 @@ class ListBooks extends Component {
       BooksAPI.search(query)
         .then(found => {
           found.map(foundBook => {
-            /* TODO: Check if the found book is in the users shelf
-            * display first the found book with a note of what shelf it is in
+            /* Check if the found book is in the users shelf
+            * if not then the shelf is none
             */
-            //foundBook.shelf = 'none'
+            let bookId = this.props.books.findIndex((b) => b.id === foundBook.id)
+            bookId < 0 ? foundBook.shelf = 'none' : foundBook.shelf = this.props.books[bookId].shelf
           })
           return this.setState({ foundBooks: found })
         })

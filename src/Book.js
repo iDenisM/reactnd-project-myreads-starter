@@ -4,12 +4,10 @@ class Book extends React.Component {
   // Shelf change method
   handleChangeShelf = (event) => {
     this.props.onChangeShelf && this.props.onChangeShelf(this.props.book, event.target.value)
-    console.log(`Shelf to ${event.target.value}`);
   }
 
   // Render the component
   render() {
-    const book = this.props.book
     return (
       <li>
         <div className="book">
@@ -19,7 +17,7 @@ class Book extends React.Component {
               style={{
                 width: 128,
                 height: 193,
-                backgroundImage: `url(${book.imageLinks.thumbnail})`
+                backgroundImage: `url(${this.props.book.imageLinks.thumbnail})`
               }}>
             </div>
             <div className="book-shelf-changer">
@@ -29,7 +27,7 @@ class Book extends React.Component {
                 */
               }
               <select
-                value={book.shelf || 'none'}
+                value={this.props.book.shelf || 'none'}
                 onChange={this.handleChangeShelf}
               >
                 <option value="none" disabled>Move to...</option>
@@ -40,9 +38,9 @@ class Book extends React.Component {
               </select>
             </div>
           </div>
-          <div className="book-title">{book.title}</div>
-          {book.authors && (
-            book.authors.map((author) => (
+          <div className="book-title">{this.props.book.title}</div>
+          {this.props.book.authors && (
+            this.props.book.authors.map((author) => (
               <div key={author} className="book-authors">{author}</div>
             ))
           )}
