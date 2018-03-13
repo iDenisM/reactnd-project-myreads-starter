@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Book from './Book'
+import Shelf from './Shelf'
 import { Link } from 'react-router-dom'
 
 class Shelfs extends Component {
@@ -11,48 +11,14 @@ class Shelfs extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Currently Reading</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {this.props.books.filter(b => b.shelf === 'currentlyReading').map(b => (
-                    <Book
-                      key={b.id}
-                      book={b}
-                      onChangeShelf={this.props.onChangeShelf}
-                    />
-                  ))}
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Want to Read</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {this.props.books.filter(b => b.shelf === 'wantToRead').map(b => (
-                    <Book
-                      key={b.id}
-                      book={b}
-                      onChangeShelf={this.props.onChangeShelf}
-                    />
-                  ))}
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Read</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {this.props.books.filter(b => b.shelf === 'read').map(b => (
-                    <Book
-                      key={b.id}
-                      book={b}
-                      onChangeShelf={this.props.onChangeShelf}
-                    />
-                  ))}
-                </ol>
-              </div>
-            </div>
+            {this.props.shelfs.map((shelf) => (
+              <Shelf
+                key={shelf.value}
+                shelf={shelf}
+                books={this.props.books}
+                onChangeShelf={this.props.onChangeShelf}
+              />
+            ))}
           </div>
         </div>
         <div className="open-search">

@@ -47,6 +47,17 @@ class BooksApp extends React.Component {
   }
 
   render() {
+    const shelfs = [{
+      name: 'Currently Reading',
+      value: 'currentlyReading'
+    }, {
+      name: 'Want to read',
+      value: 'wantToRead'
+    }, {
+      name: 'Read',
+      value: 'read'
+    }]
+
     return (
       <div className="app">
         <Route exact path='/search' render={() => (
@@ -59,6 +70,7 @@ class BooksApp extends React.Component {
           <Shelfs
             books={this.state.books}
             onChangeShelf={this.changeShelf}
+            shelfs={shelfs}
           />
         )}/>
 
