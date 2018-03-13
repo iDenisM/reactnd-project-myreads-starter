@@ -17,9 +17,6 @@ class BooksApp extends React.Component {
       })
   }
 
-  changeShelf1 = (book, shelf) => {
-  }
-
   changeShelf = (book, shelf) => {
     /* Use the findIndex to see if the book is in the book array
     * if the value is less then 0 (ususaly -1) then there is no
@@ -31,8 +28,6 @@ class BooksApp extends React.Component {
       book.shelf = shelf
       // This is a new book
       this.setState((state) => state.books.push(book))
-      console.log(book.shelf)
-      console.log(this.state.books)
     } else {
       // This is an existing book
       this.setState((state) => state.books[bookId].shelf = shelf)
@@ -42,7 +37,6 @@ class BooksApp extends React.Component {
     */
     this.setState((state) => (state.books.filter((b) => b.shelf !== 'none')))
     BooksAPI.update({id: book.id}, shelf)
-    console.log(this.state.books)
   }
 
   render() {

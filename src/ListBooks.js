@@ -27,12 +27,13 @@ class ListBooks extends Component {
             */
             let bookId = this.props.books.findIndex((b) => b.id === foundBook.id)
             bookId < 0 ? foundBook.shelf = 'none' : foundBook.shelf = this.props.books[bookId].shelf
+            return foundBook
           })
-          return this.setState({ foundBooks: found })
+          this.setState({ foundBooks: found })
         })
         .catch((err) => {
           console.log('Some Error', err);
-          return this.setState({
+          this.setState({
             foundBooks: [],
             noBooksFound: true
           })
