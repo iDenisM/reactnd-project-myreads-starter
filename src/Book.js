@@ -8,6 +8,7 @@ class Book extends Component {
 
   // Render the component
   render() {
+    const {book} = this.props
     return (
       <li>
         <div className="book">
@@ -17,7 +18,7 @@ class Book extends Component {
               style={{
                 width: 128,
                 height: 193,
-                backgroundImage: `url(${this.props.book.imageLinks.thumbnail})`
+                backgroundImage: `url(${book.imageLinks && book.imageLinks.thumbnail })`
               }}>
             </div>
             <div className="book-shelf-changer">
@@ -27,7 +28,7 @@ class Book extends Component {
                 */
               }
               <select
-                value={this.props.book.shelf || 'none'}
+                value={book.shelf || 'none'}
                 onChange={this.handleChangeShelf}
               >
                 <option value="noValue" disabled>Move to...</option>
@@ -38,9 +39,9 @@ class Book extends Component {
               </select>
             </div>
           </div>
-          <div className="book-title">{this.props.book.title}</div>
-          {this.props.book.authors && (
-            this.props.book.authors.map((author) => (
+          <div className="book-title">{book.title}</div>
+          {book.authors && (
+            book.authors.map((author) => (
               <div key={author} className="book-authors">{author}</div>
             ))
           )}

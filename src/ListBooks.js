@@ -21,6 +21,7 @@ class ListBooks extends Component {
       this.setState({ noBooksFound: false })
       BooksAPI.search(query)
         .then(found => {
+          console.log(found)
           found.map(foundBook => {
             /* Check if the found book is in the users shelf
             * if not then the shelf is none
